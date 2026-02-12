@@ -7,7 +7,7 @@ export default function AppLogo() {
                 <AppLogoIcon className="size-28 fill-current " />
             </div>
             <div className="ml-1 grid flex-1 text-left text-sm">
-                <span className="mb-0.5 truncate text-lg text-[#c0c0c0] leading-tight font-semibold">
+                <span className="mb-0.5 truncate text-lg text-white leading-tight font-semibold">
                     Marwane Elhosni
                 </span>
             </div>

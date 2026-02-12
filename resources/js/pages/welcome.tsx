@@ -84,8 +84,33 @@ useEffect(() => {
 }, [])
 
 
+const cpt = [
+  { title: "BLS Services", 
+    img: "/cpt/1.png", 
+    description:"Skip hire for rubble and wood, any distance.Fast service in the Bas-Rhin region, around Strasbourg and its surroundings.", 
+    tags: ["WordPress", "PHP", "Java-script"] },
+    
+  { title: "Airless Decoration", 
+    img: "/cpt/2.png", 
+    description:"Interior and exterior painting services for individuals and professionals. Modern techniques (airless painting, sprayed plaster) for a high-end, durable and meticulous finish.", 
+    tags: ["WordPress", "PHP", "Java-script"] },
+
+  { title: "Age d'Or Services", 
+    img: "/cpt/3.png", 
+    description:"Composed of a team of home care professionals, the Age d’Or agency prioritizes meeting your needs, whether they are daily or more occasional. Our team is ready to listen to you, discuss your needs, and provide the services best suited to your lifestyle.", 
+    tags: ["WordPress", "PHP", "Java-script"] },
+
+  { title: "AHC Plumber", 
+    img: "/cpt/4.png", 
+    description:"AHC Plomberie is a company specializing in all plumbing, heating and bathroom creation work in the Rouen area.", 
+    tags: ["WordPress", "PHP", "Java-script"] },
+]
+
+
 
   return (
+    <>
+    <AppTop/>
     <div
   onMouseEnter={() => setIsHovering(true)}
   onMouseLeave={() => setIsHovering(false)}
@@ -108,7 +133,7 @@ useEffect(() => {
                 playsInline
                 className="w-full fixed h-full object-cover"
             >
-                <source src="/videos/vd-2.mp4" type="video/mp4" />
+                <source src="/videos/vd-1.mp4" type="video/mp4" />
             </video>
             {/* Glass Cursor Effect */}
             <div className="lens fixed pointer-events-none z-20" />
@@ -148,7 +173,7 @@ useEffect(() => {
           </nav>
         </header> */}
 
-        <AppTop/>
+        
 
         <main className="flex gap-8 items-center w-full my-40 h-full max-w-83.75 lg:max-w-7xl">
           <div className="w-full">
@@ -246,11 +271,45 @@ useEffect(() => {
               {">"}
             </div>
 
-            <div className="flex gap-12 mt-12 justify-between items-center">
-              <div className="flex flex-col gap-4 max-w-sm">
-                <img src="" alt="" />
+            <div className="grid grid-cols-2 font-sans gap-32 mt-12 justify-between items-center">
+              <div className="flex flex-col gap-24">
+                {cpt.slice(0, 2).map((project) => (
+                  <div key={project.title} className="flex flex-col gap-7">
+                    <img src={project.img} alt={project.title} className="rounded-lg scale-[1.09] hover:scale-[1] transition-all duration-700 object-cover h-96 hover:h-88 max-w-3xl"/>
+                    <div className="flex flex-col gap-3">
+                      <h4 className="text-xl font-bold text-white">{project.title}</h4>
+                      <p className="text-sm text-gray-300">{project.description}</p>
+                      <div className="flex gap-2">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="text-[14px] font-sans bg-[#2E2E2E] text-[#7af298] py-1  px-3 rounded-3xl">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col font-sans gap-24">
+                {cpt.slice(2).map((project) => (
+                  <div key={project.title} className="flex flex-col gap-7">
+                    <img src={project.img} alt={project.title} className="rounded-lg scale-[1.09] hover:scale-[1] transition-all duration-700 object-cover h-96 hover:h-88 max-w-3xl"/>
+                    <div className="flex flex-col gap-3">
+                      <h4 className="text-xl font-bold text-white">{project.title}</h4>
+                      <p className="text-sm text-gray-300">{project.description}</p>
+                      <div className="flex gap-2">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="text-[14px] font-sans bg-[#2E2E2E] text-[#7af298] py-1  px-3 rounded-3xl">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          <div className="flex items-center my-24 text-[#7af298] font-semibold justify-center gap-1">
+            <Link className="flex mx-auto items-center font-sans gap-2 border border-[#131313] bg-[#7af298] text-[#131313] p-2.5 px-7 rounded-3xl">
+              View More Projects
+            </Link>
+          </div>
           </div>
         </main>
 
@@ -287,5 +346,6 @@ useEffect(() => {
       </div>
       </div>
     </div>
+    </>
   )
 }

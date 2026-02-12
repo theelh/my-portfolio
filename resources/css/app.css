@@ -32,7 +32,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: radial-gradient(circle, #c5c5c506, rgba(255, 255, 255, 0));
+  background: radial-gradient(circle, #c5c5c502, rgba(255, 255, 255, 0));
 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(10px);
@@ -59,13 +59,13 @@
 }
 
 body {
-  cursor: url('/icons/pointer.png') 10 10, auto;
+  cursor: url('/icons/arrow.png') 12 12, auto;
 }
 
 a,
 button,
 .cursor-pointer {
-  cursor: url('/icons/click.png') 16 16, pointer;
+  cursor: url('/icons/circle.png') 16 16, pointer;
 }
 
 

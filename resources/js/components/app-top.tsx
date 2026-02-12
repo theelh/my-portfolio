@@ -18,24 +18,36 @@ const AppTop: React.FC<{ canRegister?: boolean }> = () => {
   const lastScrollY = useRef(0)
   const currentPath = window.location.pathname
 
-  useEffect(() => {
+  // const lastScrollY = useRef<number>(0)
+
+useEffect(() => {
+  lastScrollY.current = window.scrollY
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY
+    const direction =
+      currentScrollY > lastScrollY.current ? "down" : "up"
 
     setIsScrolled(currentScrollY > 20)
 
-    if (currentScrollY > lastScrollY.current) {
+    if (direction === "down" && currentScrollY > 100) {
       setIsVisible(false)
-    } else {
+    }
+
+    if (direction === "up") {
       setIsVisible(true)
     }
 
-    lastScrollY.current = currentScrollY    
+    lastScrollY.current = currentScrollY
   }
 
-  window.addEventListener('scroll', handleScroll)
-  return () => window.removeEventListener('scroll', handleScroll)
+  window.addEventListener("scroll", handleScroll)
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll)
+  }
 }, [])
+
 
 
 
@@ -53,27 +65,27 @@ const AppTop: React.FC<{ canRegister?: boolean }> = () => {
     fixed top-4 left-1/2 z-50
     -translate-x-1/2
     w-full max-w-7xl lg:max-w-7xl
-    border-[#DDA0DDFF] shadow-sm shadow-[#00ff00]
+    border-white/45 shadow-md shadow-white/20
     rounded-3xl text-sm bg-black/80 backdrop-blur-xs
     transition-all duration-500 ease-out
     ${
       isVisible
         ? 'translate-y-0 opacity-100'
-        : '-translate-y-20 opacity-0'
+        : '-translate-y-70 opacity-0'
     }
     ${
       isScrolled
         ? `
-          bg-white/70 backdrop-blur-xl
-          border border-[#DDA0DDFF]
+          bg-black/80 backdrop-blur-xl
+          border border-white
           border-spacing-7
-          shadow-xl shadow-[#DDA0DDFF]
+          shadow-xl shadow-[#7af298]/50
           before:absolute before:inset-0 before:rounded-3xl
           before:border before:border-transparent
           before:bg-linear-to-r
-          before:from-indigo-400/20
-          before:via-blue-400/20
-          before:to-purple-400/20
+          before:from-[#7af298]/20
+          before:via-[#11001c]/20
+          before:to-[#7af298]/20
           before:-z-10
         `
         : 'bg-transparent border-transparent shadow-none'
@@ -100,8 +112,8 @@ const AppTop: React.FC<{ canRegister?: boolean }> = () => {
                     currentPath === item.href
                       ? 'text-[#c0c0c0] font-mono'
                       : isScrolled
-                        ? 'text-[#00ff00]'
-                        : 'text-[#00ff00]'
+                        ? 'text-white'
+                        : 'text-white'
                   }
                   hover:text-[#67f767]
                 `}
@@ -117,7 +129,7 @@ const AppTop: React.FC<{ canRegister?: boolean }> = () => {
 
           {/* Auth actions */}
           <nav className="flex items-center justify-end gap-4">
-            <Link className="flex items-center font-mono gap-2 border border-[#c0c0c0] bg-[#11001c] text-[#00ff00] p-2 px-3">
+            <Link className="flex items-center font-mono gap-2 border border-[#c0c0c0] bg-[#7af298] text-[#131313] p-2 px-3">
             Download CV
             <DownloadIcon className="size-4"/>
             </Link>
