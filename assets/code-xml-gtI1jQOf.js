@@ -1,0 +1,1 @@
+import{c as o}from"./utils-C2fB7_LP.js";const t=[["path",{d:"M7 7h10v10",key:"1tivn9"}],["path",{d:"M7 17 17 7",key:"1vkiza"}]],a=o("ArrowUpRight",t);const e=[["path",{d:"m18 16 4-4-4-4",key:"1inbqp"}],["path",{d:"m6 8-4 4 4 4",key:"15zrgr"}],["path",{d:"m14.5 4-5 16",key:"e7oirm"}]],c=o("CodeXml",e);export{a as A,c as C};
