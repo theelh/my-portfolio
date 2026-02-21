@@ -38,7 +38,7 @@ export const Brain: React.FC<BrainProps> = ({ url, rotationSpeed = 0.001 }) => {
         color: "#11001c",                 // main brain color
         roughness: 0.5,
         metalness: 0.1,
-        emissive: new THREE.Color("#00ff00"), // neon electric glow
+        emissive: new THREE.Color("#67f767"), // neon electric glow
         emissiveIntensity: 0.1,              // slightly stronger for bloom
       });
       child.material.needsUpdate = true;

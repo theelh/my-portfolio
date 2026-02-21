@@ -68,6 +68,10 @@ button,
   cursor: url('/icons/circle.png') 16 16, pointer;
 }
 
+.input{
+  @apply w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-white/30;
+}
+
 
 @theme {
     --font-sans:

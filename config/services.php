@@ -38,6 +38,9 @@ return [
         'url' => env('HUGGINGFACE_URL', 'https://router.huggingface.co/hf-inference'),
         ],
     ],
+    'mailtrap' => [
+        'token' => env('MAILTRAP_TOKEN'),
+    ],
     
 
 ];

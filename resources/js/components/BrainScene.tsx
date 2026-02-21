@@ -20,13 +20,13 @@ export const BrainScene: React.FC = () => {
       <Environment preset="studio" background={false} environmentIntensity={0.4} />
 
       {/* Directional highlights */}
-      <directionalLight position={[3, 3, 3]} intensity={0.5} color="#00ff00" />
-      <directionalLight position={[-3, -2, -3]} intensity={0.3} color="#00ff00" />
+      <directionalLight position={[3, 3, 3]} intensity={0.5} color="#67f767" />
+      <directionalLight position={[-3, -2, -3]} intensity={0.3} color="#67f767" />
 
       {/* Internal “brain lights” */}
-      <pointLight position={[0, 0, 0]} intensity={20.15} color="#00ff00" />
-      <pointLight position={[0.5, 0.2, 0]} intensity={10.1} color="#00ff00" />
-      <pointLight position={[-0.5, -0.2, 0]} intensity={10.1} color="#00ff00" />
+      <pointLight position={[0, 0, 0]} intensity={20.15} color="#67f767" />
+      <pointLight position={[0.5, 0.2, 0]} intensity={10.1} color="#67f767" />
+      <pointLight position={[-0.5, -0.2, 0]} intensity={10.1} color="#67f767" />
 
       {/* Floating & rotating brain */}
       <Float

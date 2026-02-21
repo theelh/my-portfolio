@@ -11,7 +11,7 @@ export default function FloatingButton({ onClick }: Props) {
       onClick={onClick}
       className="
         fixed bottom-6 right-6 z-50 flex font-sans font-bold items-center gap-2
-        bg-[#00ff00] hover:text-[#00ff00] hover:bg-[#210235] 
+        bg-[#7AF298] hover:text-[#7AF298] hover:bg-[#131313] hover:border hover:border-[#7AF298] 
         text-[#11001c] p-4 rounded-full shadow-xl
         transition-all duration-300
       "

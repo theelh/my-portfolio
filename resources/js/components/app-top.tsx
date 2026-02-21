@@ -1,145 +1,167 @@
-import { Link } from '@inertiajs/react'
-import i18next from 'i18next'; 
-import i18n from 'i18next-browser-languagedetector';
-import { DownloadIcon } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react'
-import AppLogo from './app-logo';
+import { Link } from "@inertiajs/react"
+import i18next from "i18next"
+import { DownloadIcon, Menu, X } from "lucide-react"
+import React, { useEffect, useRef, useState } from "react"
+import AppLogo from "./app-logo"
 
 interface NavItem {
   title: string
   href: string
 }
 
-
-const AppTop: React.FC<{ canRegister?: boolean }> = () => {
-  const isRTL: boolean = i18next.language === 'ar'
+const AppTop: React.FC = () => {
+  const isRTL: boolean = i18next.language === "ar"
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
+
   const lastScrollY = useRef(0)
   const currentPath = window.location.pathname
 
-  // const lastScrollY = useRef<number>(0)
+  useEffect(() => {
+    lastScrollY.current = window.scrollY
 
-useEffect(() => {
-  lastScrollY.current = window.scrollY
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      const direction =
+        currentScrollY > lastScrollY.current ? "down" : "up"
 
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY
-    const direction =
-      currentScrollY > lastScrollY.current ? "down" : "up"
+      setIsScrolled(currentScrollY > 20)
 
-    setIsScrolled(currentScrollY > 20)
+      if (direction === "down" && currentScrollY > 100) {
+        setIsVisible(false)
+      }
 
-    if (direction === "down" && currentScrollY > 100) {
-      setIsVisible(false)
+      if (direction === "up") {
+        setIsVisible(true)
+      }
+
+      lastScrollY.current = currentScrollY
     }
 
-    if (direction === "up") {
-      setIsVisible(true)
-    }
-
-    lastScrollY.current = currentScrollY
-  }
-
-  window.addEventListener("scroll", handleScroll)
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll)
-  }
-}, [])
-
-
-
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const navItems: NavItem[] = [
-    { title: "Home", href: '/' },
-    { title: "About", href: '/welcservices' },
-    { title: "Project", href: '/welcAbout' },
-    { title: "Contact", href: '/welccontact' },
+    { title: "Home", href: "/" },
+    { title: "About", href: "/about" },
+    { title: "Project", href: "/projects" },
+    { title: "Contact", href: "/contact" },
   ]
 
   return (
     <header
-  dir={isRTL ? 'rtl' : 'ltr'}
-  className={`
-    fixed top-4 left-1/2 z-50
-    -translate-x-1/2
-    w-full max-w-7xl lg:max-w-7xl
-    border-white/45 shadow-md shadow-white/20
-    rounded-3xl text-sm bg-black/80 backdrop-blur-xs
-    transition-all duration-500 ease-out
-    ${
-      isVisible
-        ? 'translate-y-0 opacity-100'
-        : '-translate-y-70 opacity-0'
-    }
-    ${
-      isScrolled
-        ? `
-          bg-black/80 backdrop-blur-xl
-          border border-white
-          border-spacing-7
-          shadow-xl shadow-[#7af298]/50
-          before:absolute before:inset-0 before:rounded-3xl
-          before:border before:border-transparent
-          before:bg-linear-to-r
-          before:from-[#7af298]/20
-          before:via-[#11001c]/20
-          before:to-[#7af298]/20
-          before:-z-10
-        `
-        : 'bg-transparent border-transparent shadow-none'
-    }
-  `}
->
-      <div className="mx-auto max-w-7xl px-6">
+      dir={isRTL ? "rtl" : "ltr"}
+      className={`
+        fixed top-4 left-1/2 -translate-x-1/2 z-50
+        w-[95%] max-w-7xl
+        rounded-3xl
+        transition-all duration-500 ease-out
+        ${
+          isVisible
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-24 opacity-0"
+        }
+        ${
+          isScrolled
+            ? "bg-black/80 backdrop-blur-xl border border-white/20 shadow-xl shadow-[#7af298]/30"
+            : "bg-transparent"
+        }
+      `}
+    >
+      <div className="px-6">
         <div className="flex h-16 items-center justify-between">
 
-          {/* Logo */}
+          {/* LOGO */}
           <Link href="/" className="flex items-center gap-2">
             <AppLogo />
           </Link>
 
-          {/* Main navigation */}
-          <nav className="flex items-center gap-7">
+          {/* DESKTOP NAV */}
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`
-                  relative px-4 py-2 text-sm font-medium transition-all
+                className={`relative px-3 py-2 text-sm font-medium transition-all
                   ${
                     currentPath === item.href
-                      ? 'text-[#c0c0c0] font-mono'
-                      : isScrolled
-                        ? 'text-white'
-                        : 'text-white'
+                      ? "text-[#7AF298]"
+                      : "text-white"
                   }
-                  hover:text-[#67f767]
+                  hover:text-[#7AF298]
                 `}
               >
                 {item.title}
 
                 {currentPath === item.href && (
-                  <span className="absolute -bottom-1 left-1/2 h-0.5 w-12 -translate-x-1/2 rounded-full border-b border-[#DDA0DDFF] bg-[#c0c0c0] shadow-sm shadow-[#DDA0DDFF] " />
+                  <span className="absolute -bottom-1 left-1/2 h-0.5 w-10 -translate-x-1/2 bg-[#7AF298]" />
                 )}
               </Link>
             ))}
           </nav>
 
-          {/* Auth actions */}
-          <nav className="flex items-center justify-end gap-4">
-            <Link className="flex items-center font-mono gap-2 border border-[#c0c0c0] bg-[#7af298] text-[#131313] p-2 px-3">
-            Download CV
-            <DownloadIcon className="size-4"/>
-            </Link>
-          </nav>
+          {/* DESKTOP BUTTON */}
+          <div className="hidden md:flex items-center">
+            <a
+                href="/files/my-resum-es.pdf"
+                target="_blank"
+                className="flex items-center gap-2 border border-[#c0c0c0] bg-[#7af298] text-black px-4 py-2 rounded-md font-mono text-sm">
+              Download CV
+              <DownloadIcon size={16} />
+            </a>
+          </div>
 
+          {/* MOBILE HAMBURGER */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE MENU */}
+      <div
+        className={`
+          md:hidden overflow-hidden transition-all duration-500 ease-in-out
+          ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+        `}
+      >
+        <div className="flex flex-col gap-4 px-6 pb-6 pt-2 bg-black/90 backdrop-blur-xl rounded-b-3xl">
+
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className={`text-base font-medium transition-colors
+                ${
+                  currentPath === item.href
+                    ? "text-[#7AF298]"
+                    : "text-white"
+                }
+                hover:text-[#7AF298]
+              `}
+            >
+              {item.title}
+            </Link>
+          ))}
+
+          <a
+            href="/files/my-resum-es.pdf"
+            target="_blank"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-center gap-2 border border-[#c0c0c0] bg-[#7af298] text-black px-4 py-2 rounded-md font-mono text-sm mt-4"
+          >
+            Download CV
+            <DownloadIcon size={16} />
+          </a>
         </div>
       </div>
     </header>
-
-    
   )
 }
 

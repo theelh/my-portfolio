@@ -30,9 +30,11 @@ type Project = {
 
 const terminalData = {
   projects: [
-    { name: "Portfolio", url: "https://your-portfolio.com" },
-    { name: "E-commerce App", url: "https://shop.example.com" },
-    { name: "Admin Dashboard", url: "https://dashboard.example.com" },
+    { name: "OSCULT BTP", url: "https://oscult-ingenierie.ma/" },
+    { name: "BLS Services", url: "https://locationbenne-alsace.fr/" },
+    { name: "Airless Decoration", url: "https://airlessdecoration.fr/" },
+    { name: "Age d'Or Services", url: "https://agedorservicesguyane.fr/" },
+    { name: "AHC Plumber", url: "https://ahcplomberie.fr/" },
   ],
   skills: ["languages", "tools", "frameworks"],
 }
@@ -133,10 +135,8 @@ const [chartData, setChartData] = useState<any>(null)
       "ls - list files/folders",
       "cd <folder> - enter folder",
       "cd .. - return to root",
-      "cd skills - enter skills folder",
-        "cat <languages | tools | frameworks> - show skill levels",
-        "exit - close chart",
-      "close chart / exit - close chart",
+      "cat <file> - view file content",
+      "to exit - close chart",
       "clear - clear terminal",
     ]
   }else if (cmd === "-h") {
@@ -146,8 +146,7 @@ const [chartData, setChartData] = useState<any>(null)
       "cd <folder> - enter folder",
       "cd .. - return to root",
       "cat <file> - view file content",
-      "chart - show skills chart",
-      "close chart / exit - close chart",
+      "to exit - close chart",
       "clear - clear terminal",
     ]
   }
@@ -315,47 +314,68 @@ else if (cmd === "skills frameworks") {
   },
 }
   return (
-    <main className="flex w-full h-full max-w-4xl font-mono justify-start">
-      <div className="flex flex-col max-w-3xl gap-3 bg-black/50 p-8 rounded-2xl font-mono text-white">
-        <h1 className="text-2xl font-bold">👋 I'm Marwane <span className="text-[#c0c0c0]">Elhosni</span></h1>
-        <p className="text-lg text-[#c0c0c0]">
-          I craft fast, scalable web apps. Explore my skills and projects using the terminal below. <br />
-          -h to start or continue scrolling.
-        </p>
+    <main className="w-full px-6 flex justify-center">
+  <div className="w-full max-w-5xl">
+    <div className="flex flex-col gap-6 bg-black/60 backdrop-blur-md p-6 md:p-10 rounded-2xl text-white shadow-2xl">
 
-        {/* Terminal */}
-        <div className="mt-6 bg-black/70 p-4 rounded-xl min-h-55 flex flex-col overflow-y-auto">
+      {/* HEADER */}
+      <div className="space-y-3">
+        <h1 className="text-2xl md:text-3xl font-bold">
+          👋 I'm Marwane{" "}
+          <span className="text-[#7AF298]">Elhosni</span>
+        </h1>
+
+        <p className="text-sm lg:text-lg md:text-lg text-[#c0c0c0] leading-relaxed">
+          I craft fast, scalable web apps. Explore my skills and projects
+          using the terminal below.
+          <br className="hidden sm:block" />
+          Type <span className="text-[#c4a000] font-semibold">-h</span> to start
+          or continue scrolling.
+        </p>
+      </div>
+
+      {/* TERMINAL */}
+      <div className="mt-4 bg-black/80 border border-white/10 p-4 md:p-6 rounded-xl 
+                      h-[200px] md:h-[300px] lg:h-[300px] 
+                      flex flex-col overflow-hidden">
+
+        {/* OUTPUT SCROLL AREA */}
+        <div className="flex-1 overflow-y-auto pr-2 space-y-1">
           {output.map((line, i) => (
-            <div key={i} className="whitespace-pre-wrap">
+            <div key={i} className="whitespace-pre-wrap text-sm md:text-base">
               {line}
             </div>
           ))}
 
-          <div className="flex gap-2 mt-2">
-            <span className="text-[#c0c0c0]">
-                marwane@/:~{currentFolder !== "root" && `/${currentFolder}`}$
-            </span>
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleCommand}
-              className="flex-1 bg-transparent outline-none text-[#c4a000] placeholder-[#c4a000]"
-              placeholder="type a command..."
-            />
-          </div>
-
-          {/* Chart */}
           {showChart && chartData && (
-  <div className="mt-4 w-full">
-    Type "close chart" to quit
-    <Bar data={chartData} options={skillChartOptions} />
-  </div>
-)}
+            <div className="mt-4 w-full">
+              <p className="text-xs text-gray-400 mb-2">
+                Type "close chart" to quit
+              </p>
+              <Bar data={chartData} options={skillChartOptions} />
+            </div>
+          )}
         </div>
 
-        
+        {/* INPUT */}
+        <div className="flex gap-2 mt-4 items-center">
+          <span className="text-[#c0c0c0] text-sm md:text-base">
+            marwane@/:~
+            {currentFolder !== "root" && `/${currentFolder}`}$
+          </span>
+
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleCommand}
+            className="flex-1 bg-transparent outline-none text-[#c4a000] placeholder-[#c4a000] text-sm md:text-base"
+            placeholder="type a command..."
+          />
+        </div>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
   )
 }
