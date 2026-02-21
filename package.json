@@ -1,4 +1,5 @@
 {
+    "homepage": "https://github.com/theelh/my-portfolio",
     "$schema": "https://www.schemastore.org/package.json",
     "private": true,
     "type": "module",
@@ -6,6 +7,9 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
+        "preview": "vite preview",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
@@ -22,6 +26,7 @@
         "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-react": "^7.37.3",
         "eslint-plugin-react-hooks": "^7.0.0",
+        "gh-pages": "^6.3.0",
         "prettier": "^3.4.2",
         "prettier-plugin-tailwindcss": "^0.6.11",
         "typescript-eslint": "^8.23.0"
